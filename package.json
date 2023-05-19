@@ -17,7 +17,7 @@
         "commit": "cz",
         "update-all": "ncu -u",
         "pack": "rm -rf ./lib && ncc build -m -o lib",
-        "all": "npm run build && npm run lint:fix && npm run pack",
+        "all": "npm run build && npm run pack",
         "publish": "NODE_OPTIONS=--openssl-legacy-provider npm run all"
     },
     "config": {
