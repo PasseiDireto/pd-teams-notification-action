@@ -36,26 +36,31 @@ jobs:
       - build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./
+      - name: Checkout the code
+        uses: actions/checkout@v3
+      - name: Start Test
+        uses: ./
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ vars.MS_TEAMS_WEBHOOK_URI }}
           notification-summary: Deployment Started
           notification-color: 17a2b8
-      - uses: ./
+      - name: Warning Test
+        uses: ./
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ vars.MS_TEAMS_WEBHOOK_URI }}
           notification-summary: Warning! Something Not Quite Right
           notification-color: ffc107
-      - uses: ./
+      - name: Error Test
+        uses: ./
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ vars.MS_TEAMS_WEBHOOK_URI }}
           notification-summary: OMG!! Something Exploded
           notification-color: dc3545
-      - uses: ./
+      - name: Success Test
+        uses: ./
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ vars.MS_TEAMS_WEBHOOK_URI }}
