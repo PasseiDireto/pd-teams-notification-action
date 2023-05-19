@@ -1,7 +1,7 @@
 {
     "name": "pd-teams-notification-action",
     "description": "GitHub Action to send MS Teams Notification",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "private": true,
     "engines": {
         "node": ">=18.0.0",
@@ -10,12 +10,15 @@
     "main": "dist/main.js",
     "scripts": {
         "prepare": "husky install",
-        "build": "npx tsc",
+        "build": "rm -rf ./dist && npx tsc",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "lint-staged": "lint-staged",
         "commit": "cz",
-        "update-all": "ncu -u"
+        "update-all": "ncu -u",
+        "pack": "rm -rf ./lib && ncc build -m -o lib",
+        "all": "npm run build && npm run lint:fix && npm run pack",
+        "publish": "NODE_OPTIONS=--openssl-legacy-provider npm run all"
     },
     "config": {
         "commitizen": {
