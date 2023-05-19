@@ -26,6 +26,8 @@ jobs:
       #   run: |
       #     npm run lint
       - name: Run Pack
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: |
           npm run pack
 
