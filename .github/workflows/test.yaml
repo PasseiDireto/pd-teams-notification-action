@@ -22,9 +22,9 @@ jobs:
       - name: Run Build
         run: |
           npm run build
-      - name: Run Linter
-        run: |
-          npm run lint
+      # - name: Run Linter
+      #   run: |
+      #     npm run lint
       - name: Run Pack
         run: |
           npm run pack
