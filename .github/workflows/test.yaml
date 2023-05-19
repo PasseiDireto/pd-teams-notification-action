@@ -19,12 +19,19 @@ jobs:
       - name: Install NPM Packages
         run: |
           npm ci
-      - name: Install NPM Packages
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
+      - name: Run Build
         run: |
-          npm run all
+          npm run build
+      - name: Run Linter
+        run: |
+          npm run lint
+      - name: Run Pack
+        run: |
+          npm run pack
+
   test:
+    needs:
+      - build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
