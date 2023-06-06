@@ -59,7 +59,7 @@ jobs:
       - name: Error Test
         uses: ./
         with:
-          github-token: ${{ github.token }}
+          github-token: teste
           ms-teams-webhook-uri: ${{ vars.MS_TEAMS_WEBHOOK_URI }}
           notification-summary: OMG!! Something Exploded
           notification-color: dc3545
