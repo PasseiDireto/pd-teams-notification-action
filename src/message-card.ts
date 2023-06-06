@@ -3,6 +3,7 @@ export function createMessageCard(
   notificationColor: string,
   commit: any,
   author: any,
+  authorLogin: string,
   runNum: string,
   runId: string,
   repoName: string,
@@ -26,7 +27,7 @@ export function createMessageCard(
       {
         activityTitle: `**CI #${runNum} (commit ${sha.substr(0, 7)})** on [${repoName}](${repoUrl})`,
         activityImage: avatar_url,
-        activitySubtitle: `by ${commit.data.commit.author.name} [(@${author.login})](${author.html_url}) on ${timestamp}`,
+        activitySubtitle: `by ${commit.data.commit.author.name} [(@${authorLogin})](${author.html_url}) on ${timestamp}`,
       },
     ],
     potentialAction: [

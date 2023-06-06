@@ -28,12 +28,14 @@ async function run(): Promise<void> {
     const octokit = new Octokit({ auth: `token ${githubToken}` });
     const commit = await octokit.repos.getCommit(params);
     const author = commit.data.author;
+    const authorLogin = author ? author.login : 'None';
 
     const messageCard = await createMessageCard(
       notificationSummary,
       notificationColor,
       commit,
       author,
+      authorLogin,
       runNum,
       runId,
       repoName,
