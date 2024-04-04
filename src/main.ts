@@ -4,7 +4,6 @@ import axios from 'axios';
 import moment from 'moment-timezone';
 import { createMessageCard } from './message-card';
 
-
 async function run(): Promise<void> {
   try {
     const githubToken = core.getInput('github-token', { required: true });
