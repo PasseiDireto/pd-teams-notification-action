@@ -18,5 +18,5 @@ inputs:
     description: "Timezone (ex. America/Sao_Paulo)"
     required: false
 runs:
-  using: "node16"
+  using: "node20"
   main: "lib/index.js"
