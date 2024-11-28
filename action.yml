@@ -7,7 +7,10 @@ inputs:
     required: true
   ms-teams-webhook-uri:
     description: "Microsoft Teams Webhook URI"
-    required: true
+    required: false
+  workflow-teams-webhook-uri:
+    description: "Microsoft Workflow Teams Webhook URI"
+    required: false
   notification-summary:
     description: "Message to be sent to Microsoft Teams channel"
     required: true

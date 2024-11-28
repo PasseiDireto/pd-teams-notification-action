@@ -8,8 +8,9 @@ async function run(): Promise<void> {
   try {
     const githubToken = core.getInput('github-token', { required: true });
     const msTeamsWebhookUri: string = core.getInput('ms-teams-webhook-uri', {
-      required: true,
+      required: false,
     });
+    const workflowWebhookUri: string = core.getInput('workflow-teams-webhook-uri', { required: false });
 
     const notificationSummary = core.getInput('notification-summary') || 'GitHub Action Notification';
     const notificationColor = core.getInput('notification-color') || '0b93ff';
@@ -41,12 +42,25 @@ async function run(): Promise<void> {
       repoName,
       sha,
       repoUrl,
-      timestamp
+      timestamp,
+      workflowWebhookUri
     );
 
     console.log(messageCard);
 
-    axios
+    if(!msTeamsWebhookUri){
+      axios
+      .post(workflowWebhookUri, messageCard)
+      .then(function (response) {
+        console.log(response);
+        core.debug(response.data);
+      })
+      .catch(function (error) {
+        core.debug(error);
+      });
+    }
+    else{
+      axios
       .post(msTeamsWebhookUri, messageCard)
       .then(function (response) {
         console.log(response);
@@ -55,6 +69,7 @@ async function run(): Promise<void> {
       .catch(function (error) {
         core.debug(error);
       });
+    }
   } catch (error) {
     console.log(error);
     core.setFailed(error.message);
