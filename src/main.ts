@@ -50,7 +50,7 @@ async function run(): Promise<void> {
 
     if(!msTeamsWebhookUri){
       axios
-      .post(workflowWebhookUri, messageCard)
+      .post(workflowWebhookUri, {"type": "message", "attachments": [messageCard]})
       .then(function (response) {
         console.log(response);
         core.debug(response.data);
