@@ -1,7 +1,7 @@
 {
     "name": "pd-teams-notification-action",
     "description": "GitHub Action to send MS Teams Notification",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "private": true,
     "engines": {
         "node": ">=20.0.0",
