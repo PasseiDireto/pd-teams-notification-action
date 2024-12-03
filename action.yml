@@ -16,7 +16,10 @@ inputs:
     required: true
   notification-color:
     description: "Color of notification header line"
-    required: true
+    required: false
+  notification-color-workflow:
+    description: "Color of notification header line"
+    required: false
   timezone:
     description: "Timezone (ex. America/Sao_Paulo)"
     required: false
