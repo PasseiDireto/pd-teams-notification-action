@@ -13,7 +13,8 @@ async function run(): Promise<void> {
     const workflowWebhookUri: string = core.getInput('workflow-teams-webhook-uri', { required: false });
 
     const notificationSummary = core.getInput('notification-summary') || 'GitHub Action Notification';
-    const notificationColor = core.getInput('notification-color') || '0b93ff';
+    const notificationColor = core.getInput('notification-color') || '';
+    const notificationColorWorkflow = core.getInput('notification-color-workflow') || ''
     const timezone = core.getInput('timezone') || 'America/Sao_Paulo';
 
     const timestamp = moment().tz(timezone).format('dddd, MMMM Do YYYY, h:mm:ss a z');
@@ -28,13 +29,15 @@ async function run(): Promise<void> {
 
     const octokit = new Octokit({ auth: `token ${githubToken}` });
     const commit = await octokit.repos.getCommit(params);
+    const html_url = commit.data.html_url;
     const author = commit.data.author;
     const authorLogin = author ? author.login : 'None';
 
     const messageCard = await createMessageCard(
       notificationSummary,
-      notificationColor,
+      !notificationColor ? notificationColorWorkflow : notificationColor,
       commit,
+      html_url,
       author,
       authorLogin,
       runNum,

@@ -2,6 +2,7 @@ export function createMessageCard(
   notificationSummary: string,
   notificationColor: string,
   commit: any,
+  html_url: string,
   author: any,
   authorLogin: string,
   runNum: string,
@@ -42,7 +43,7 @@ export function createMessageCard(
         },
         {
           '@context': 'http://schema.org',
-          target: [commit.data.html_url],
+          target: [`${html_url}`],
           '@type': 'ViewAction',
           name: 'View Commit Changes',
         },
@@ -72,7 +73,7 @@ export function createMessageCard(
               },
               {
                 "type": "Column",
-                "width": "*",
+                "width": "auto",
                 "items": [
                   {
                     "type": "TextBlock",
@@ -97,14 +98,14 @@ export function createMessageCard(
         ],
         "actions": [
           {
-            "type": "ACtion.OpenUrl",
+            "type": "Action.OpenUrl",
             "title": "View Workflow Run",
             "url": `${repoUrl}/actions/runs/${runId}`
           },
           {
             "type": "Action.OpenUrl",
             "title": "View Commit Changes",
-            "url": commit.data.html_url
+            "url": html_url
           }
         ]
       }

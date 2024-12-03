@@ -36,12 +36,40 @@ jobs:
           timezone: America/Sao_Paulo
 ```
 
+```yaml
+name: MS Teams Notification use microsoft workflow
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      # this is the new step using the ms-teams-notification action
+      - name: Notify dedicated teams channel
+        uses: PasseiDireto/pd-teams-notification-action@main
+        with:
+          github-token: ${{ github.token }} # this will use the runner's token.
+          workflow-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: Your custom notification message 
+          notification-color-workflow: good
+          timezone: America/Sao_Paulo
+```
+
 3. Make it your own with the following configurations.
    - `github-token` - (required), set to the following:
      - `${{ github.token }}`
-   - `webhook-uri` - (required), setup a new secret to store your Microsoft Teams Webhook URI (ex. `MS_TEAMS_WEBHOOK_URI`). Learn more about setting up [GitHub Secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) or [Microsoft Teams Incoming Webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
+   - `webhook-uri` - If use microsoft workflow this parameter is optional, setup a new secret to store your Microsoft Teams Webhook URI (ex. `MS_TEAMS_WEBHOOK_URI`). Learn more about setting up [GitHub Secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) or [Microsoft Teams Incoming Webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
+   - `workflow-teams-webhook-uri` - If use incoming webhook this parameter is optional, setup a new secret to store your Microsoft Teams Webhook URI (ex. `MS_TEAMS_WEBHOOK_URI`). Learn more about setting up [GitHub Secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) or [Microsoft Teams Incoming Webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
    - `notification-summary` (required), Your custom notification message (ex. Deployment Started or Build Successful)
-   - `notification-color` (optional), Custom color to help distinguish type of notification. Can be any [HEX color](https://html-color.codes/). (ex. **007bff** or **17a2b8** for info, **28a745** success, **ffc107** warning, **dc3545** error, etc.) 
+   - `notification-color` - If use microsoft workflow this parameter is optional, Custom color to help distinguish type of notification. Can be any [HEX color](https://html-color.codes/). (ex. **007bff** or **17a2b8** for info, **28a745** success, **ffc107** warning, **dc3545** error, etc.)
+   - `notification-color-workflow` - If use incoming webhook this parameter is optional, Custom color to help distinguish type of notification. The options can be used are: (**accent**  for info, **good** for success, **attention** for error, **warning** for warning)
    - `timezone` - (optional, defaults to `America/Sao_Paulo`), a [valid database timezone name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), (ex. Australia/Sydney or America/Denver, etc.)
 
 ## Examples
